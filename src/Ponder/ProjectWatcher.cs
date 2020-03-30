@@ -28,9 +28,4 @@ namespace Ponder
             return fileChanges.StartWith(_project).ObserveOn(_scheduler);
         }
     }
-
-    public interface IFilesystemWatcher
-    {
-        IObservable<string> WatchFolder(string folder);
-    }
 }
