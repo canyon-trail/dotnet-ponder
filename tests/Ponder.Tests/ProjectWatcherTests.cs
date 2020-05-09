@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
@@ -32,7 +33,7 @@ namespace Ponder.Tests
         public void PublishesImmediately()
         {
             _watcher
-                .Setup(x => x.WatchFolder(_project.WatchFolder))
+                .Setup(x => x.WatchFolder(_project.WatchFolders.Single()))
                 .Returns(Observable.Never(""));
 
             var messages = new List<Project>();
@@ -47,7 +48,7 @@ namespace Ponder.Tests
         public void PublishesOnFileChange()
         {
             _watcher
-                .Setup(x => x.WatchFolder(_project.WatchFolder))
+                .Setup(x => x.WatchFolder(_project.WatchFolders.Single()))
                 .Returns(new[] {
                     ValidCsFile
                 }.ToObservable());
@@ -64,9 +65,9 @@ namespace Ponder.Tests
         public void NoPublishOnIrrelevantFile()
         {
             _watcher
-                .Setup(x => x.WatchFolder(_project.WatchFolder))
+                .Setup(x => x.WatchFolder(_project.WatchFolders.Single()))
                 .Returns(new[] {
-                    Path.Join(_project.WatchFolder, "File1.txt")
+                    Path.Join(_project.ProjectFolder, "File1.txt")
                 }.ToObservable());
 
             var messages = new List<Project>();
@@ -82,7 +83,7 @@ namespace Ponder.Tests
         {
             var subject = new Subject<string>();
             _watcher
-                .Setup(x => x.WatchFolder(_project.WatchFolder))
+                .Setup(x => x.WatchFolder(_project.WatchFolders.Single()))
                 .Returns(subject.ObserveOn(_scheduler));
 
             new List<double> { 1, 1.1, 1.2, 1.45 }
@@ -102,6 +103,6 @@ namespace Ponder.Tests
             count.Should().Be(3);
         }
 
-        private string ValidCsFile => Path.Join(_project.WatchFolder, "File1.cs");
+        private string ValidCsFile => Path.Join(_project.ProjectFolder, "File1.cs");
     }
 }

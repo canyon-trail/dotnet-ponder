@@ -14,5 +14,10 @@ namespace Ponder
         {
             return Directory.GetFiles(dir, "*.csproj");
         }
+
+        public string ReadFile(string path)
+        {
+            return File.ReadAllText(path);
+        }
     }
 }

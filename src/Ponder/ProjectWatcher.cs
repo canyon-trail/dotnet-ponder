@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 
@@ -19,8 +20,9 @@ namespace Ponder
 
         public IObservable<Project> GetChanges()
         {
-            var fileChanges = _watcher
-                .WatchFolder(_project.WatchFolder)
+            var fileChanges = _project.WatchFolders
+                .Select(_watcher.WatchFolder)
+                .Merge()
                 .Where(x => _project.IsMatch(x))
                 .Select(x => _project)
                 .Throttle(TimeSpan.FromSeconds(0.25), _scheduler);

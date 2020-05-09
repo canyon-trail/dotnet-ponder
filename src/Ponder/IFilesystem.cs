@@ -6,6 +6,8 @@ namespace Ponder
     {
         IEnumerable<string> GetCsProjFiles(string dir);
         bool FileExists(string path);
+
+        string ReadFile(string path);
     }
 
 }
