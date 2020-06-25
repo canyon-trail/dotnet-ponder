@@ -6,6 +6,9 @@ using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Ponder
 {
@@ -13,7 +16,23 @@ namespace Ponder
     {
         static async Task Main(string[] args)
         {
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+            var serviceProvider = new ServiceCollection()
+                .AddLogging(b => b.AddConfiguration(config.GetSection("Logging")).AddConsole())
+                .AddTransient<ProjectLoader>()
+                .AddTransient<IFilesystem, RealFilesystem>()
+                .AddTransient<ProjectWatcher>()
+                .AddTransient<IFilesystemWatcher, FilesystemWatcher>()
+                .AddTransient<IScheduler>(x => Scheduler.Default)
+                .BuildServiceProvider();
+
             await Task.CompletedTask;
+
+            var rootLogger = serviceProvider.GetRequiredService<ILogger<Program>>();
+
+            rootLogger.LogDebug("Starting ponder at {workingDir} with args {args}", Environment.CurrentDirectory, args);
 
             var projectPath = args.FirstOrDefault() ?? ".";
 
@@ -27,9 +46,14 @@ namespace Ponder
                 return;
             }
 
-            var project = new Project(findResult.ProjectPath);
+            var project = serviceProvider.GetRequiredService<ProjectLoader>()
+                .Load(findResult.ProjectPath);
 
-            var watcher = new ProjectWatcher(project, new FilesystemWatcher(), Scheduler.Default);
+            var watcher = new ProjectWatcher(
+                project,
+                serviceProvider.GetRequiredService<IFilesystemWatcher>(),
+                Scheduler.Default,
+                serviceProvider.GetRequiredService<ILogger<ProjectWatcher>>());
 
             var testRunFactory = new TestRunFactory();
 

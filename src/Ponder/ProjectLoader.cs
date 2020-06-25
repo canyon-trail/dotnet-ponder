@@ -2,16 +2,19 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using Microsoft.Extensions.Logging;
 
 namespace Ponder
 {
     public sealed class ProjectLoader
     {
         private readonly IFilesystem _filesystem;
+        private readonly ILogger<ProjectLoader> _logger;
 
-        public ProjectLoader(IFilesystem filesystem)
+        public ProjectLoader(IFilesystem filesystem, ILogger<ProjectLoader> logger)
         {
             _filesystem = filesystem;
+            _logger = logger;
         }
 
         public Project Load(string projectFilePath)
@@ -23,6 +26,7 @@ namespace Ponder
 
         private Project ParseProject(string projectFilePath, string root)
         {
+            _logger.LogWarning("Parsing project at {path}", projectFilePath);
             var projectFileXml = XElement.Parse(_filesystem.ReadFile(projectFilePath));
 
             var projectFolder = Path.GetFullPath(Path.Join(root, Path.GetDirectoryName(projectFilePath)));

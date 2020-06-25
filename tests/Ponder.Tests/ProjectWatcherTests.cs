@@ -6,8 +6,8 @@ using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Threading.Tasks;
 using FluentAssertions;
+using Microsoft.Extensions.Logging;
 using Microsoft.Reactive.Testing;
 using Moq;
 using Xunit;
@@ -26,7 +26,7 @@ namespace Ponder.Tests
             _project = new Project("./Example.csproj");
             _watcher = new Mock<IFilesystemWatcher>(MockBehavior.Strict);
             _scheduler = new TestScheduler();
-            _testee = new ProjectWatcher(_project, _watcher.Object, _scheduler);
+            _testee = new ProjectWatcher(_project, _watcher.Object, _scheduler, new Mock<ILogger<ProjectWatcher>>().Object);
         }
 
         [Fact]

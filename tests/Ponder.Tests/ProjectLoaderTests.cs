@@ -1,5 +1,6 @@
 using System.IO;
 using FluentAssertions;
+using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
 
@@ -13,7 +14,7 @@ namespace Ponder.Tests
         public ProjectLoaderTests()
         {
             _filesystem = new Mock<IFilesystem>(MockBehavior.Strict);
-            _testee = new ProjectLoader(_filesystem.Object);
+            _testee = new ProjectLoader(_filesystem.Object, new Mock<ILogger<ProjectLoader>>().Object);
         }
 
         [Fact]
