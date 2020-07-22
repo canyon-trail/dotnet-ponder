@@ -14,22 +14,24 @@ namespace Ponder
             _logger = logger;
         }
 
-        public IObservable<string> WatchFolder(string folder)
+        public IObservable<RelPath> WatchFolder(RelPath folder)
         {
+            var absPath = io.Path.GetFullPath(folder.Path);
             var baseObservable = Observable.Create<string>(observer => {
-                var absPath = io.Path.GetFullPath(folder);
-                var watcher = new io.FileSystemWatcher(absPath)
-                {
-                    IncludeSubdirectories = true
-                };
+                    var watcher = new io.FileSystemWatcher(absPath)
+                    {
+                        IncludeSubdirectories = true
+                    };
 
-                watcher.Changed += (o, e) => observer.OnNext(io.Path.GetRelativePath(folder, e.FullPath));
-                watcher.Created += (o, e) => observer.OnNext(io.Path.GetRelativePath(folder, e.FullPath));
-                watcher.Deleted += (o, e) => observer.OnNext(io.Path.GetRelativePath(folder, e.FullPath));
-                watcher.Renamed += (o, e) => observer.OnNext(io.Path.GetRelativePath(folder, e.FullPath));
+                    watcher.Changed += (o, e) => observer.OnNext(e.FullPath);
+                    watcher.Created += (o, e) => observer.OnNext(e.FullPath);
+                    watcher.Deleted += (o, e) => observer.OnNext(e.FullPath);
+                    watcher.Renamed += (o, e) => observer.OnNext(e.FullPath);
 
-                return watcher;
-            });
+                    return watcher;
+                })
+                .Select(x => io.Path.GetRelativePath(absPath, x))
+                .Select(RelPath.FromString);
 
             return baseObservable
                 .Select(x => {

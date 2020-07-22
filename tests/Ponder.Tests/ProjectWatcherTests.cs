@@ -23,7 +23,7 @@ namespace Ponder.Tests
 
         public ProjectWatcherTests()
         {
-            _project = new Project("./Example.csproj");
+            _project = new Project(RelPath.FromString("Example.csproj"));
             _watcher = new Mock<IFilesystemWatcher>(MockBehavior.Strict);
             _scheduler = new TestScheduler();
             _testee = new ProjectWatcher(_project, _watcher.Object, _scheduler, new Mock<ILogger<ProjectWatcher>>().Object);
@@ -34,7 +34,7 @@ namespace Ponder.Tests
         {
             _watcher
                 .Setup(x => x.WatchFolder(_project.WatchFolders.Single()))
-                .Returns(Observable.Never(""));
+                .Returns(Observable.Never(RelPath.Empty));
 
             var messages = new List<Project>();
             _testee.GetChanges().Subscribe(messages.Add);
@@ -67,7 +67,7 @@ namespace Ponder.Tests
             _watcher
                 .Setup(x => x.WatchFolder(_project.WatchFolders.Single()))
                 .Returns(new[] {
-                    Path.Join(_project.ProjectFolder, "File1.txt")
+                    _project.ProjectFolder.Append("File1.txt")
                 }.ToObservable());
 
             var messages = new List<Project>();
@@ -81,7 +81,7 @@ namespace Ponder.Tests
         [Fact]
         public void DebouncesAtQuarterSecond()
         {
-            var subject = new Subject<string>();
+            var subject = new Subject<RelPath>();
             _watcher
                 .Setup(x => x.WatchFolder(_project.WatchFolders.Single()))
                 .Returns(subject.ObserveOn(_scheduler));
@@ -103,6 +103,6 @@ namespace Ponder.Tests
             count.Should().Be(3);
         }
 
-        private string ValidCsFile => Path.Join(_project.ProjectFolder, "File1.cs");
+        private RelPath ValidCsFile => _project.ProjectFolder.Append("File1.cs");
     }
 }

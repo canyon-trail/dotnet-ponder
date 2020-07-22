@@ -17,24 +17,22 @@ namespace Ponder
             _logger = logger;
         }
 
-        public Project Load(string projectFilePath)
+        public Project Load(RelPath projectFilePath)
         {
-            var root = Directory.GetCurrentDirectory();
-
-            return ParseProject(projectFilePath, root);
+            return ParseProject(projectFilePath, RelPath.FromString(""));
         }
 
-        private Project ParseProject(string projectFilePath, string root)
+        private Project ParseProject(RelPath projectFilePath, RelPath root)
         {
-            _logger.LogWarning("Parsing project at {path}", projectFilePath);
-            var projectFileXml = XElement.Parse(_filesystem.ReadFile(projectFilePath));
+            _logger.LogWarning("Parsing project at {path}", projectFilePath.Path);
+            var projectFileXml = XElement.Parse(_filesystem.ReadFile(projectFilePath.Path));
 
-            var projectFolder = Path.GetFullPath(Path.Join(root, Path.GetDirectoryName(projectFilePath)));
+            var projectFolder = projectFilePath.Parent;
 
             var otherProjects = projectFileXml
                 .Descendants("ProjectReference")
                 .Select(x => x.Attribute("Include").Value)
-                .Select(x => Path.GetRelativePath(root, Path.GetFullPath(Path.Join(projectFolder, x))))
+                .Select(x => RelPath.FromString(x).RelativeTo(projectFolder).RelativeTo(root))
                 .Select(x => ParseProject(x, root))
                 .ToArray();
 

@@ -6,36 +6,36 @@ namespace Ponder
 {
     public sealed class Project
     {
-        public Project(string csProjPath, params Project[] references)
+        public Project(RelPath csProjPath, params Project[] references)
         {
             CsProjPath = csProjPath;
             References = references;
         }
-        public string CsProjPath { get; }
+        public RelPath CsProjPath { get; }
         public IEnumerable<Project> References { get; }
+        public RelPath ProjectFolder => CsProjPath.Parent;
 
-        public IEnumerable<string> WatchPaths => new[] {
+        public IEnumerable<RelPath> WatchPaths => new[] {
             CsProjPath,
-            Path.Combine(Path.GetDirectoryName(CsProjPath)!, "**", "*.cs")
+            ProjectFolder.Append("**", "*.cs")
         };
 
-        public IEnumerable<string> WatchFolders =>
+        public IEnumerable<RelPath> WatchFolders =>
             new[] {
-                Path.GetDirectoryName(CsProjPath)!
+                ProjectFolder
             }.Concat(
                 References.SelectMany(x => x.WatchFolders)
             )
             .Distinct();
 
-        public string ProjectFolder => Path.GetDirectoryName(CsProjPath)!;
 
-        public bool IsMatch(string path) =>
-            path == CsProjPath || (
-                path.StartsWith(ProjectFolder)
-                && path.EndsWith(".cs")
+        public bool IsMatch(RelPath path) =>
+            path.IsSameAs(CsProjPath) || (
+                path.IsChildPathOf(ProjectFolder)
+                && path.Segments.Last().EndsWith(".cs")
             );
 
-        public Project? FindPertinentProject(string path)
+        public Project? FindPertinentProject(RelPath path)
         {
             return IsMatch(path)
                 ? this

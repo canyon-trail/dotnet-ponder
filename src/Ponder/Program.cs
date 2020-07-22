@@ -47,7 +47,7 @@ namespace Ponder
             }
 
             var project = serviceProvider.GetRequiredService<ProjectLoader>()
-                .Load(findResult.ProjectPath);
+                .Load(RelPath.FromString(findResult.ProjectPath!));
 
             var watcher = new ProjectWatcher(
                 project,

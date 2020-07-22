@@ -10,12 +10,12 @@ namespace Ponder.Tests
         public void DefaultFilePaths()
         {
             var testee = new Project(
-                Path.Combine(".", "somewhere", "sample.csproj")
+                RelPath.Empty.Append(".", "somewhere", "sample.csproj")
                 );
 
             var expected = new[] {
                 testee.CsProjPath,
-                Path.Combine(".", "somewhere", "**", "*.cs")
+                RelPath.Empty.Append(".", "somewhere", "**", "*.cs")
             };
 
             testee.WatchPaths.Should().BeEquivalentTo(expected);
@@ -25,10 +25,10 @@ namespace Ponder.Tests
         public void ProjectFolder()
         {
             var testee = new Project(
-                Path.Combine(".", "somewhere", "sample.csproj")
+                RelPath.Empty.Append(".", "somewhere", "sample.csproj")
                 );
 
-            var expected = Path.Combine(".", "somewhere");
+            var expected = RelPath.Empty.Append(".", "somewhere");
 
             testee.ProjectFolder.Should().Be(expected);
         }
@@ -40,10 +40,10 @@ namespace Ponder.Tests
         [InlineData(true, "somewhere", "sample.csproj")]
         public void CsFileMatches(bool isMatch, params string[] segments)
         {
-            var fullPath = Path.Combine(".", Path.Combine(segments));
+            var fullPath = RelPath.Empty.Append(segments);
 
             var testee = new Project(
-                Path.Combine(".", "somewhere", "sample.csproj")
+                RelPath.Empty.Append(".", "somewhere", "sample.csproj")
                 );
 
             testee.IsMatch(fullPath).Should().Be(isMatch);
@@ -53,16 +53,16 @@ namespace Ponder.Tests
         public void TransitiveWatchFolders()
         {
             var referencedProject = new Project(
-                Path.Combine(".", "elsewhere", "sample.csproj")
+                RelPath.Empty.Append(".", "elsewhere", "sample.csproj")
                 );
             var testee = new Project(
-                Path.Combine(".", "somewhere", "sample.csproj"),
+                RelPath.Empty.Append(".", "somewhere", "sample.csproj"),
                 referencedProject
                 );
 
             testee.WatchFolders.Should().BeEquivalentTo(new[] {
-                Path.Combine(".", "elsewhere"),
-                Path.Combine(".", "somewhere"),
+                RelPath.Empty.Append(".", "elsewhere"),
+                RelPath.Empty.Append(".", "somewhere"),
             });
         }
 
@@ -70,22 +70,22 @@ namespace Ponder.Tests
         public void DistinctWatchFolders()
         {
             var referencedProject = new Project(
-                Path.Combine(".", "elsewhere", "sample.csproj")
+                RelPath.Empty.Append(".", "elsewhere", "sample.csproj")
                 );
             var anotherProject = new Project(
-                Path.Combine(".", "another", "sample.csproj"),
+                RelPath.Empty.Append(".", "another", "sample.csproj"),
                 referencedProject
                 );
             var testee = new Project(
-                Path.Combine(".", "somewhere", "sample.csproj"),
+                RelPath.Empty.Append(".", "somewhere", "sample.csproj"),
                 referencedProject,
                 anotherProject
                 );
 
             testee.WatchFolders.Should().BeEquivalentTo(new[] {
-                Path.Combine(".", "elsewhere"),
-                Path.Combine(".", "somewhere"),
-                Path.Combine(".", "another"),
+                RelPath.Empty.Append(".", "elsewhere"),
+                RelPath.Empty.Append(".", "somewhere"),
+                RelPath.Empty.Append(".", "another"),
             });
         }
 
@@ -93,18 +93,18 @@ namespace Ponder.Tests
         public void GetsMatchProject()
         {
             var referencedProject = new Project(
-                Path.Combine(".", "elsewhere", "sample.csproj")
+                RelPath.Empty.Append(".", "elsewhere", "sample.csproj")
                 );
             var anotherProject = new Project(
-                Path.Combine(".", "another", "sample.csproj"),
+                RelPath.Empty.Append(".", "another", "sample.csproj"),
                 referencedProject
                 );
             var testee = new Project(
-                Path.Combine(".", "somewhere", "sample.csproj"),
+                RelPath.Empty.Append(".", "somewhere", "sample.csproj"),
                 anotherProject
                 );
 
-            var filePath = Path.Combine(".", "elsewhere", "foo.cs");
+            var filePath = RelPath.Empty.Append(".", "elsewhere", "foo.cs");
 
             testee.FindPertinentProject(filePath)
                 .Should().Be(referencedProject);

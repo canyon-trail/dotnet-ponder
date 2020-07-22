@@ -4,6 +4,6 @@ namespace Ponder
 {
     public interface IFilesystemWatcher
     {
-        IObservable<string> WatchFolder(string folder);
+        IObservable<RelPath> WatchFolder(RelPath folder);
     }
 }

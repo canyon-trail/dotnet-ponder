@@ -20,7 +20,7 @@ namespace Ponder.Tests
         [Fact]
         public void LoadsIslandProject()
         {
-            string projectFilePath = "./Example.csproj";
+            var projectFilePath = RelPath.FromString("./Example.csproj");
             SetupLeafProject(projectFilePath);
             var project = _testee.Load(projectFilePath);
 
@@ -36,10 +36,10 @@ namespace Ponder.Tests
                 </ItemGroup>
             </Project>";
 
-            string projectFilePath = Path.Combine(".", "example", "Example.csproj");
-            string otherProjectPath = Path.Combine("..", "other", "other.csproj");
+            var projectFilePath = RelPath.Empty.Append(".", "example", "Example.csproj");
+            var otherProjectPath = RelPath.Empty.Append("..", "other", "other.csproj");
             _filesystem
-                .Setup(x => x.ReadFile(projectFilePath))
+                .Setup(x => x.ReadFile(projectFilePath.Path))
                 .Returns(rootProjectText);
             SetupLeafProject(otherProjectPath);
             var project = _testee.Load(projectFilePath);
@@ -61,14 +61,14 @@ namespace Ponder.Tests
                 </ItemGroup>
             </Project>";
 
-            string projectFilePath = Path.Combine(".", "example", "Example.csproj");
-            string otherProjectPath = Path.Combine("..", "other", "other.csproj");
-            string yetAnotherProjectPath = Path.Combine("..", "yetAnother", "yetAnother.csproj");
+            var projectFilePath = RelPath.Empty.Append(".", "example", "Example.csproj");
+            var otherProjectPath = RelPath.Empty.Append("..", "other", "other.csproj");
+            var yetAnotherProjectPath = RelPath.Empty.Append("..", "yetAnother", "yetAnother.csproj");
             _filesystem
-                .Setup(x => x.ReadFile(projectFilePath))
+                .Setup(x => x.ReadFile(projectFilePath.Path))
                 .Returns(rootProjectText);
             _filesystem
-                .Setup(x => x.ReadFile(otherProjectPath))
+                .Setup(x => x.ReadFile(otherProjectPath.Path))
                 .Returns(otherProjectText);
             SetupLeafProject(yetAnotherProjectPath);
             var project = _testee.Load(projectFilePath);
@@ -85,11 +85,11 @@ namespace Ponder.Tests
 
         // TODO: no reload same project twice?
 
-        private void SetupLeafProject(string projectPath)
+        private void SetupLeafProject(RelPath projectPath)
         {
             var projectText = @"<Project Sdk=""Microsoft.NET.Sdk""></Project>";
             _filesystem
-                .Setup(x => x.ReadFile(projectPath))
+                .Setup(x => x.ReadFile(projectPath.Path))
                 .Returns(projectText);
         }
     }
