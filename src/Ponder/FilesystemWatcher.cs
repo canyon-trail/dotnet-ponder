@@ -17,6 +17,8 @@ namespace Ponder
         public IObservable<RelPath> WatchFolder(RelPath folder)
         {
             var absPath = io.Path.GetFullPath(folder.Path);
+            var binFolder = io.Path.Combine(absPath, "bin");
+            var objFolder = io.Path.Combine(absPath, "bin");
 
             var relativeRoot = absPath;
             foreach(var segment in folder.Segments)
@@ -40,6 +42,8 @@ namespace Ponder
 
                     return watcher;
                 })
+                .Where(x => !x.StartsWith(binFolder))
+                .Where(x => !x.StartsWith(objFolder))
                 .Select(x => io.Path.GetRelativePath(relativeRoot, x))
                 .Select(RelPath.FromString);
 

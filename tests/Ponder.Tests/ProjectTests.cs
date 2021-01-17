@@ -38,7 +38,7 @@ namespace Ponder.Tests
         [InlineData(false, "somewhere", "foo", "bar.png")]
         [InlineData(false, "elsewhere", "foo", "bar.cs")]
         [InlineData(true, "somewhere", "sample.csproj")]
-        public void CsFileMatches(bool isMatch, params string[] segments)
+        public void FileMatches(bool isMatch, params string[] segments)
         {
             var fullPath = RelPath.Empty.Append(segments);
 
@@ -64,6 +64,24 @@ namespace Ponder.Tests
                 RelPath.Empty.Append(".", "elsewhere"),
                 RelPath.Empty.Append(".", "somewhere"),
             });
+        }
+
+        [Theory]
+        [InlineData(true, "elsewhere", "foo", "bar.cs")]
+        public void TransitiveMatches(bool expected, params string[] segments)
+        {
+            var referencedProject = new Project(
+                RelPath.Empty.Append(".", "elsewhere", "sample.csproj")
+                );
+            var testee = new Project(
+                RelPath.Empty.Append(".", "somewhere", "sample.csproj"),
+                referencedProject
+                );
+
+
+            var path = RelPath.Empty.Append(segments);
+
+            testee.IsMatch(path).Should().Be(expected);
         }
 
         [Fact]

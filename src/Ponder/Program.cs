@@ -90,7 +90,7 @@ namespace Ponder
                 var subscription = Observable.FromAsync(process.StandardOutput.ReadLineAsync)
                             .Repeat()
                             .TakeWhile(line => line != null)
-                            .Subscribe(observer);
+                            .Subscribe(observer!);
 
                 return Disposable.Create(() => {
                     subscription.Dispose();

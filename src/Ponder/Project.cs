@@ -30,18 +30,21 @@ namespace Ponder
 
 
         public bool IsMatch(RelPath path) =>
-            path.IsSameAs(CsProjPath) || (
-                path.IsChildPathOf(ProjectFolder)
-                && path.Segments.Last().EndsWith(".cs")
-            );
+            FindPertinentProject(path) != null;
 
         public Project? FindPertinentProject(RelPath path)
         {
-            return IsMatch(path)
+            return IsLocalMatch(path)
                 ? this
                 : References
                     .Select(x => x.FindPertinentProject(path))
                     .FirstOrDefault();
         }
+
+        private bool IsLocalMatch(RelPath path) =>
+            path.IsSameAs(CsProjPath) || (
+                path.IsChildPathOf(ProjectFolder)
+                && path.Segments.Last().EndsWith(".cs")
+            );
     }
 }
