@@ -31,7 +31,13 @@ namespace Ponder
                 })
                 .Select(_watcher.WatchFolder)
                 .Merge()
-                .Where(x => _project.IsMatch(x))
+                .Where(x => {
+                    var isMatch = _project.IsMatch(x);
+
+                    _logger.LogDebug("Got changed file {file} for project {project}; matches project: {isMatch}", x, _project.CsProjPath, isMatch);
+
+                    return isMatch;
+                })
                 .Select(x => _project)
                 .Throttle(TimeSpan.FromSeconds(0.25), _scheduler);
 

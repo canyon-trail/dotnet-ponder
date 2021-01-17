@@ -6,7 +6,7 @@ namespace Ponder
     {
         public string? ProjectPath { get; set; }
         public bool IsFound { get; set; }
-        public IEnumerable<string> Candidates { get; set; }
+        public IEnumerable<string> Candidates { get; set; } = new string[0];
     }
 
 }

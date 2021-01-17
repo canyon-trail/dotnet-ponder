@@ -17,6 +17,14 @@ namespace Ponder
         public IObservable<RelPath> WatchFolder(RelPath folder)
         {
             var absPath = io.Path.GetFullPath(folder.Path);
+
+            var relativeRoot = absPath;
+            foreach(var segment in folder.Segments)
+            {
+                relativeRoot = io.Directory.GetParent(relativeRoot).FullName;
+            }
+
+            _logger.LogDebug("Starting filesystem watcher at {path}; relative path: {folder}; relative root: {relativeRoot}", absPath, folder, relativeRoot);
             var baseObservable = Observable.Create<string>(observer => {
                     var watcher = new io.FileSystemWatcher(absPath)
                     {
@@ -28,14 +36,16 @@ namespace Ponder
                     watcher.Deleted += (o, e) => observer.OnNext(e.FullPath);
                     watcher.Renamed += (o, e) => observer.OnNext(e.FullPath);
 
+                    watcher.EnableRaisingEvents = true;
+
                     return watcher;
                 })
-                .Select(x => io.Path.GetRelativePath(absPath, x))
+                .Select(x => io.Path.GetRelativePath(relativeRoot, x))
                 .Select(RelPath.FromString);
 
             return baseObservable
                 .Select(x => {
-                    _logger.LogWarning("Got change for path {changedPath}", x);
+                    _logger.LogDebug("Got change for path {changedPath}", x);
 
                     return x;
                 });

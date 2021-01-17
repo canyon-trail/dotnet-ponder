@@ -23,6 +23,7 @@ namespace Ponder.Tests
 
         [Theory]
         [InlineData("folder1\\..", ".")]
+        [InlineData("folder1\\..\\folder2", "folder2")]
         [InlineData(".\\folder1\\..", ".")]
         [InlineData(".\\.\\folder1\\..", ".")]
         public void FromString(string input, string expected)
