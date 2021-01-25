@@ -20,7 +20,7 @@ namespace Ponder
                 .AddJsonFile("appsettings.json")
                 .Build();
             var serviceProvider = new ServiceCollection()
-                .AddLogging(b => b.AddConfiguration(config.GetSection("Logging")).AddConsole())
+                .AddLogging(b => b.AddConfiguration(config.GetSection("Logging")).AddDebug())
                 .AddTransient<ProjectLoader>()
                 .AddTransient<IFilesystem, RealFilesystem>()
                 .AddTransient<ProjectWatcher>()
