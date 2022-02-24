@@ -3,7 +3,7 @@ using System.Reactive.Linq;
 using Microsoft.Extensions.Logging;
 using io = System.IO;
 
-namespace Ponder
+namespace Ponder.Old
 {
     public sealed class FilesystemWatcher : IFilesystemWatcher
     {

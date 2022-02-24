@@ -4,7 +4,7 @@ using System.Linq;
 using System.Xml.Linq;
 using Microsoft.Extensions.Logging;
 
-namespace Ponder
+namespace Ponder.Old
 {
     public sealed class ProjectLoader
     {

@@ -1,4 +1,4 @@
-namespace Ponder
+namespace Ponder.Old
 {
     public enum CompilerIssueType
     {

@@ -10,6 +10,7 @@ using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Reactive.Testing;
 using Moq;
+using Ponder.Old;
 using Xunit;
 
 namespace Ponder.Tests

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace Ponder
+namespace Ponder.Old
 {
     public sealed class RealFilesystem : IFilesystem
     {

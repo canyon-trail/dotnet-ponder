@@ -1,6 +1,6 @@
 using System;
 
-namespace Ponder
+namespace Ponder.Old
 {
     public interface IFilesystemWatcher
     {

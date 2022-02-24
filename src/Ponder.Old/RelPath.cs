@@ -5,7 +5,7 @@ using System.Linq;
 using io = System.IO;
 using PathArray = System.Collections.Immutable.ImmutableArray<string>;
 
-namespace Ponder
+namespace Ponder.Old
 {
     public sealed class RelPath
     {

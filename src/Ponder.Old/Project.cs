@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace Ponder
+namespace Ponder.Old
 {
     public sealed class Project
     {

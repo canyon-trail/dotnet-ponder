@@ -4,7 +4,7 @@ using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using Microsoft.Extensions.Logging;
 
-namespace Ponder
+namespace Ponder.Old
 {
     public sealed class ProjectWatcher
     {

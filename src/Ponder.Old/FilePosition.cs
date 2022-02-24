@@ -1,8 +1,8 @@
-namespace Ponder
+namespace Ponder.Old
 {
     public sealed class FilePosition
     {
-        public FilePosition(string filename, int lineNumber, int column)
+        public FilePosition(string filename, int lineNumber, int? column)
         {
             Filename = filename;
             LineNumber = lineNumber;
@@ -10,6 +10,6 @@ namespace Ponder
         }
         public string Filename { get; }
         public int LineNumber { get; }
-        public int Column { get; }
+        public int? Column { get; }
     }
 }

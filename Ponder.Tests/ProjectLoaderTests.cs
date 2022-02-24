@@ -2,6 +2,7 @@ using System.IO;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Moq;
+using Ponder.Old;
 using Xunit;
 
 namespace Ponder.Tests

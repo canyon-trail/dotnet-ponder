@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Ponder
+namespace Ponder.Old
 {
     public interface IFilesystem
     {
