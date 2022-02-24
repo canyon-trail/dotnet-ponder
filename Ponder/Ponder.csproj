@@ -5,6 +5,11 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <PackageId>dotnet-ponder</PackageId>
+        <PackAsTool>true</PackAsTool>
+        <RepositoryUrl>https://github.com/canyon-trail/dotnet-ponder</RepositoryUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <ToolCommandName>dotnet-ponder</ToolCommandName>
     </PropertyGroup>
 
 </Project>
