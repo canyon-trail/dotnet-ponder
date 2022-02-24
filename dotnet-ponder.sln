@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ponder.Old", "src\Ponder.Ol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ponder.Tests", "Ponder.Tests\Ponder.Tests.csproj", "{16F12DD2-B7A4-409A-B335-A4BF3E19EC72}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ponder", "Ponder\Ponder.csproj", "{D523B64F-9B92-45E7-AABA-8E60A2A0384A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".circleci", ".circleci", "{50CB7BE9-A94B-4E04-A0D6-36472183F22A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +48,18 @@ Global
 		{16F12DD2-B7A4-409A-B335-A4BF3E19EC72}.Release|x64.Build.0 = Release|Any CPU
 		{16F12DD2-B7A4-409A-B335-A4BF3E19EC72}.Release|x86.ActiveCfg = Release|Any CPU
 		{16F12DD2-B7A4-409A-B335-A4BF3E19EC72}.Release|x86.Build.0 = Release|Any CPU
+		{D523B64F-9B92-45E7-AABA-8E60A2A0384A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D523B64F-9B92-45E7-AABA-8E60A2A0384A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D523B64F-9B92-45E7-AABA-8E60A2A0384A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D523B64F-9B92-45E7-AABA-8E60A2A0384A}.Debug|x64.Build.0 = Debug|Any CPU
+		{D523B64F-9B92-45E7-AABA-8E60A2A0384A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D523B64F-9B92-45E7-AABA-8E60A2A0384A}.Debug|x86.Build.0 = Debug|Any CPU
+		{D523B64F-9B92-45E7-AABA-8E60A2A0384A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D523B64F-9B92-45E7-AABA-8E60A2A0384A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D523B64F-9B92-45E7-AABA-8E60A2A0384A}.Release|x64.ActiveCfg = Release|Any CPU
+		{D523B64F-9B92-45E7-AABA-8E60A2A0384A}.Release|x64.Build.0 = Release|Any CPU
+		{D523B64F-9B92-45E7-AABA-8E60A2A0384A}.Release|x86.ActiveCfg = Release|Any CPU
+		{D523B64F-9B92-45E7-AABA-8E60A2A0384A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{54069EBE-60F8-4423-A538-8201EA3BD4CB} = {3A924DF1-23CD-477B-BF0C-ABD092C4E07A}
