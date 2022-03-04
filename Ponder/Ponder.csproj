@@ -12,4 +12,8 @@
         <ToolCommandName>dotnet-ponder</ToolCommandName>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Ponder.Parsers\Ponder.Parsers.fsproj" />
+    </ItemGroup>
+
 </Project>
