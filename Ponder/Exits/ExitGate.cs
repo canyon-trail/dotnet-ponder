@@ -1,4 +1,4 @@
-﻿namespace Ponder;
+﻿namespace Ponder.Exits;
 
 public sealed class ExitGate : IBusListener<ExitSignal>
 {
@@ -10,7 +10,7 @@ public sealed class ExitGate : IBusListener<ExitSignal>
         _tcs.TrySetResult();
     }
 
-    public void Publish(ExitSignal message)
+    public void OnPublish(ExitSignal message)
     {
         OpenGate();
     }

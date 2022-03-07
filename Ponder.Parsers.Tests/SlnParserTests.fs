@@ -1,5 +1,6 @@
 ﻿module Ponder.Parsers.Tests.SlnParserTests
 
+open System.IO
 open System.Reflection
 open Xunit
 open FsUnit.Xunit
@@ -15,7 +16,10 @@ let ``parses dotnet-ponder.sln`` () =
                          "Ponder.Parsers.Tests.SlnExamples.dotnet-ponder.sln")
 
     async {
-        let! result = parseSlnFromStream stream |> Async.AwaitTask
+        use rdr = new StreamReader(stream)
+        let! lines = readLines rdr
+
+        let result = parseSlnFromLines lines
 
         result |> should equal {
             Projects = [

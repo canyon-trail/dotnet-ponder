@@ -2,5 +2,5 @@
 
 public interface IBusListener<in T>
 {
-    void Publish(T message);
+    void OnPublish(T message);
 }

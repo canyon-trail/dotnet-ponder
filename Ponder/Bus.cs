@@ -6,6 +6,7 @@ public sealed class Bus : IBus
 {
     public Bus(IServiceCollection services)
     {
+        services.AddSingleton<IBus>(this);
         Provider = services.BuildServiceProvider();
     }
 
@@ -17,7 +18,7 @@ public sealed class Bus : IBus
 
         foreach (var l in listeners)
         {
-            l.Publish(message);
+            l.OnPublish(message);
         }
     }
 }

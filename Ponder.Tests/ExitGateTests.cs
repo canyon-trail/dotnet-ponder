@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
+using Ponder.Exits;
 using Xunit;
 
 namespace Ponder.Tests;

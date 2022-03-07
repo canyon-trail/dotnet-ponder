@@ -55,7 +55,7 @@ let pProject: Parser<_> =
     >>. sepBy (pInQuotes pNoQuote) (pstring ", ")
     |>> fun x -> { Name = x.Head; Path = x.Tail.Head }
 
-let private readLines (rdr :StreamReader) = async {
+let readLines (rdr :StreamReader) = async {
     let mutable lines = List<string>()
 
     let! l = rdr.ReadLineAsync() |> Async.AwaitTask
@@ -79,12 +79,15 @@ let private parseLines lines =
     )
     |> List.collect Option.toList
 
+let parseSlnFromLines lines =
+    let projects = parseLines lines
+
+    { Projects = projects }
+
 let parseSlnFromStream (str: Stream): Task<SlnFile> = task {
     use rdr = new StreamReader(str, System.Text.Encoding.UTF8)
 
     let! lines = readLines rdr
 
-    let projects = parseLines lines
-
-    return { Projects = projects }
+    return parseSlnFromLines lines
 }
