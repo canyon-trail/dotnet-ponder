@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Disposables;
@@ -13,7 +12,7 @@ using Moq;
 using Ponder.Old;
 using Xunit;
 
-namespace Ponder.Tests
+namespace Ponder.Tests.Old
 {
     public sealed class ProjectWatcherTests
     {

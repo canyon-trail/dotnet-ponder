@@ -1,11 +1,10 @@
-using System.IO;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Ponder.Old;
 using Xunit;
 
-namespace Ponder.Tests
+namespace Ponder.Tests.Old
 {
     public sealed class ProjectLoaderTests
     {

@@ -1,9 +1,9 @@
-using FluentAssertions;
+﻿using FluentAssertions;
 using Moq;
 using Ponder.Old;
 using Xunit;
 
-namespace Ponder.Tests
+namespace Ponder.Tests.Old
 {
     public sealed class ProjectFinderTests
     {

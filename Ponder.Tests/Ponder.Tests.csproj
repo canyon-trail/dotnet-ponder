@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Ponder\Ponder.csproj" />
     <ProjectReference Include="..\src\Ponder.Old\Ponder.Old.csproj" />
   </ItemGroup>
 

@@ -1,9 +1,8 @@
-using System.Linq;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Ponder.Old;
 using Xunit;
 
-namespace Ponder.Tests
+namespace Ponder.Tests.Old
 {
     public sealed class RelPathTests
     {
