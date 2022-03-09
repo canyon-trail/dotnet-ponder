@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ponder.Tests", "Ponder.Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ponder", "Ponder\Ponder.csproj", "{D523B64F-9B92-45E7-AABA-8E60A2A0384A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".circleci", ".circleci", "{50CB7BE9-A94B-4E04-A0D6-36472183F22A}"
-EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Ponder.Parsers", "Ponder.Parsers\Ponder.Parsers.fsproj", "{C45AB0CD-02BE-401E-85F9-1D51440A5200}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Ponder.Parsers.Tests", "Ponder.Parsers.Tests\Ponder.Parsers.Tests.fsproj", "{3537FE6E-D0E4-4E28-A1B2-BC5FD554F830}"
