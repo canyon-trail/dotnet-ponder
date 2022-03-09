@@ -8,11 +8,29 @@ for a .NET solution (*.sln file).
 Ponder is currently **alpha** and is not particularly useful yet. See below for
 Ponder's development roadmap.
 
-## Installation
+## Installation/Upgrading
 
 Prerequisites: .NET 6 SDK (or newer)
 
-Run `dotnet tool install -g dotnet ponder`
+Install using:
+```
+dotnet tool install -g dotnet-ponder --version <your desired version>
+```
+
+**Note that you will need to specify a version, as `dotnet-ponder` is only publishing `-alpha` tagged packages.**
+
+Upgrade using:
+
+```
+dotnet tool update -g dotnet-ponder --version <your desired version>
+```
+
+If you have trouble getting the latest version, try adding the `--no-cache` argument:
+
+```
+dotnet tool update -g dotnet-ponder --no-cache --version <your desired version>
+```
+
 
 ## Running
 
