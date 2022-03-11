@@ -80,7 +80,7 @@ let private parseLines lines =
     |> List.collect Option.toList
 
 let parseSlnFromLines lines =
-    let projects = parseLines lines
+    let projects = parseLines (List.ofSeq lines)
 
     { Projects = projects }
 

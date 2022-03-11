@@ -19,21 +19,21 @@ public sealed class SlnFinder
 
         if (files.Length == 0)
         {
-            _bus.Publish(new ErrorMessageAndExitSignal(
+            await _bus.Publish(new ErrorMessageAndExitSignal(
                 "Unable to find sln file;" +
                 " run in a directory with a single sln file " +
                 "or specify the path to the sln"));
         }
         else if (files.Length > 1)
         {
-            _bus.Publish(new ErrorMessageAndExitSignal(
+            await _bus.Publish(new ErrorMessageAndExitSignal(
                 "Found multiple sln files;" +
                 " run in a directory with a single sln file " +
                 "or specify the path to the sln"));
         }
         else
         {
-            _bus.Publish(new SlnSelected(files[0]));
+            await _bus.Publish(new SlnSelected(files[0]));
         }
     }
 }

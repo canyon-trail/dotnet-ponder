@@ -9,10 +9,12 @@ public sealed class ErrorExit
     {
         _bus = bus;
     }
-    public void OnPublish(ErrorMessageAndExitSignal message)
+    public Task OnPublish(ErrorMessageAndExitSignal message)
     {
         Console.Error.WriteLine(message.Message);
 
         _bus.Publish(new ExitSignal());
+
+        return Task.CompletedTask;
     }
 }

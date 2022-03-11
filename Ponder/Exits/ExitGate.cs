@@ -10,8 +10,10 @@ public sealed class ExitGate : IBusListener<ExitSignal>
         _tcs.TrySetResult();
     }
 
-    public void OnPublish(ExitSignal message)
+    public Task OnPublish(ExitSignal message)
     {
         OpenGate();
+
+        return Task.CompletedTask;
     }
 }

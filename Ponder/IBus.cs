@@ -2,5 +2,5 @@
 
 public interface IBus
 {
-    void Publish<T>(T message);
+    Task Publish<T>(T message) where T : notnull;
 }

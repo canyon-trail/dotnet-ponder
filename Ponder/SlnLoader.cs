@@ -5,15 +5,17 @@ namespace Ponder;
 public sealed class SlnLoader : IBusListener<SlnSelected>
 {
     private readonly IBus _bus;
+    private readonly IFilesystem _filesystem;
 
-    public SlnLoader(IBus bus)
+    public SlnLoader(IBus bus, IFilesystem filesystem)
     {
         _bus = bus;
+        _filesystem = filesystem;
     }
 
-    public void OnPublish(SlnSelected message)
+    public async Task OnPublish(SlnSelected message)
     {
-        LoadSln(message.SlnPath).GetAwaiter().GetResult();
+        await LoadSln(message.SlnPath);
     }
 
     private async Task LoadSln(string slnPath)
@@ -24,13 +26,11 @@ public sealed class SlnLoader : IBusListener<SlnSelected>
             " run in a directory with a single sln file " +
             "or specify the path to the sln");
 
-            _bus.Publish(new ExitSignal());
+            await _bus.Publish(new ExitSignal());
             return;
         }
 
-        await using var slnStream = File.OpenRead(slnPath);
-
-        var slnFile = await Ponder.Parsers.SlnParser.parseSlnFromStream(slnStream);
+        var slnFile = await _filesystem.LoadSln(slnPath);
 
         Console.WriteLine("Projects:");
         foreach (var project in slnFile.Projects)
@@ -38,6 +38,6 @@ public sealed class SlnLoader : IBusListener<SlnSelected>
             Console.WriteLine($"\t{project.Name}: {project.Path}");
         }
 
-        _bus.Publish(new ExitSignal());
+        await _bus.Publish(new ExitSignal());
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Ponder.Exits;
+using Ponder.Projects;
 
 namespace Ponder;
 
@@ -14,6 +15,10 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IBusListener<ExitSignal>>(ctx => ctx.GetRequiredService<ExitGate>());
         services.AddTransient<IBusListener<ErrorMessageAndExitSignal>, ErrorExit>();
         services.AddTransient<SlnFinder>();
+
+        services.AddTransient<ProjectLoader>();
+        services.AddTransient<IBusListener<SlnLoaded>, ProjectLoader>();
+
         services.AddTransient<IBusListener<SlnSelected>, SlnLoader>();
         services.AddTransient<IFilesystem, RealFilesystem>();
 
