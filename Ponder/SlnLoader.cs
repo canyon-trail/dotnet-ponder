@@ -1,4 +1,5 @@
-﻿using Ponder.Exits;
+﻿using System.Collections.Immutable;
+using Ponder.Exits;
 
 namespace Ponder;
 
@@ -20,7 +21,7 @@ public sealed class SlnLoader : IBusListener<SlnSelected>
 
     private async Task LoadSln(string slnPath)
     {
-        if (!File.Exists(slnPath))
+        if (!_filesystem.Exists(slnPath))
         {
             Console.WriteLine($"File {slnPath} not found;" +
             " run in a directory with a single sln file " +
@@ -38,6 +39,6 @@ public sealed class SlnLoader : IBusListener<SlnSelected>
             Console.WriteLine($"\t{project.Name}: {project.Path}");
         }
 
-        await _bus.Publish(new ExitSignal());
+        await _bus.Publish(new SlnLoaded(ImmutableArray.CreateRange(slnFile.Projects)));
     }
 }

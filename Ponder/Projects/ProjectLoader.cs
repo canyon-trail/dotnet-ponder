@@ -17,9 +17,7 @@ public sealed class ProjectLoader : IBusListener<SlnLoaded>
 
         var projects = await Task.WhenAll(parseProjectTasks);
 
-        foreach (var projectInfo in projects)
-        {
-            await _bus.Publish(new ProjectLoaded(projectInfo));
-        }
+        await Task.WhenAll(
+            projects.Select(x => _bus.Publish(new ProjectLoaded(x))));
     }
 }

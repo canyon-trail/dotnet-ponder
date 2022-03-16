@@ -14,6 +14,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<ExitGate>();
         services.AddSingleton<IBusListener<ExitSignal>>(ctx => ctx.GetRequiredService<ExitGate>());
         services.AddTransient<IBusListener<ErrorMessageAndExitSignal>, ErrorExit>();
+
         services.AddTransient<SlnFinder>();
 
         services.AddTransient<ProjectLoader>();

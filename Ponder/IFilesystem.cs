@@ -11,6 +11,7 @@ public interface IFilesystem
     Task<ImmutableArray<string>> ListFiles(string directory, string filter);
     Task<SlnParser.SlnFile> LoadSln(string path);
     Task<Projects.ProjectInfo> LoadProject(string path);
+    bool Exists(string path);
 }
 
 public sealed class RealFilesystem : IFilesystem
@@ -49,5 +50,10 @@ public sealed class RealFilesystem : IFilesystem
             .Any(x => x.Attribute("Include")?.Value == "Microsoft.NET.Test.Sdk");
 
         return new ProjectInfo(Path.GetFileNameWithoutExtension(path), path, otherProjects.ToImmutableArray(), isTest);
+    }
+
+    public bool Exists(string path)
+    {
+        return File.Exists(path);
     }
 }
