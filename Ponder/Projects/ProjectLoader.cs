@@ -1,4 +1,6 @@
-﻿namespace Ponder.Projects;
+﻿using Ponder.Sln;
+
+namespace Ponder.Projects;
 
 public sealed class ProjectLoader : IBusListener<SlnLoaded>
 {

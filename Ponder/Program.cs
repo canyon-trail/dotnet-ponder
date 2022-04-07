@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Ponder;
 using Ponder.Exits;
+using Ponder.Sln;
 
 var bus = new Bus(new ServiceCollection().AddPonderServices());
 

@@ -35,7 +35,7 @@ public sealed class ExitGateTests
 
         await AssertGateClosed(gate);
 
-        bus.Publish(new ExitSignal());
+        await bus.Publish(new ExitSignal());
 
         await AssertGateOpen(gate);
     }

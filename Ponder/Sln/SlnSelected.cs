@@ -1,3 +1,3 @@
-﻿namespace Ponder;
+﻿namespace Ponder.Sln;
 
 public record SlnSelected(string SlnPath);

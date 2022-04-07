@@ -39,7 +39,9 @@ public sealed class Bus : IBus
         {
             lock (this)
             {
+#pragma warning disable CS8601
                 _onPublish -= value;
+#pragma warning restore CS8601
             }
         }
     }

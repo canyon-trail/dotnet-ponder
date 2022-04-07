@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using Ponder.Parsers;
 using Ponder.Projects;
+using Ponder.Sln;
 using Xunit;
 
 namespace Ponder.Tests.Projects;

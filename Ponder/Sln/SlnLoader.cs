@@ -1,7 +1,7 @@
 ﻿using System.Collections.Immutable;
 using Ponder.Exits;
 
-namespace Ponder;
+namespace Ponder.Sln;
 
 public sealed class SlnLoader : IBusListener<SlnSelected>
 {
@@ -31,13 +31,11 @@ public sealed class SlnLoader : IBusListener<SlnSelected>
             return;
         }
 
-        var slnFile = await _filesystem.LoadSln(slnPath);
+        var slnRoot = Path.GetDirectoryName(slnPath);
+        Directory.SetCurrentDirectory(slnRoot!);
+        slnPath = Path.GetFileName(slnPath);
 
-        Console.WriteLine("Projects:");
-        foreach (var project in slnFile.Projects)
-        {
-            Console.WriteLine($"\t{project.Name}: {project.Path}");
-        }
+        var slnFile = await _filesystem.LoadSln(slnPath);
 
         await _bus.Publish(new SlnLoaded(ImmutableArray.CreateRange(slnFile.Projects)));
     }

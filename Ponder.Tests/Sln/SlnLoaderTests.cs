@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,9 +7,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.FSharp.Collections;
 using Moq;
 using Ponder.Parsers;
+using Ponder.Sln;
 using Xunit;
 
-namespace Ponder.Tests;
+namespace Ponder.Tests.Sln;
 
 public sealed class SlnLoaderTests
 {

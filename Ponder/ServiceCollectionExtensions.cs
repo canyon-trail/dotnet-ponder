@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Ponder.Display;
 using Ponder.Exits;
 using Ponder.Projects;
+using Ponder.Sln;
 
 namespace Ponder;
 
@@ -22,6 +24,13 @@ public static class ServiceCollectionExtensions
 
         services.AddTransient<IBusListener<SlnSelected>, SlnLoader>();
         services.AddTransient<IFilesystem, RealFilesystem>();
+
+        services.AddSingleton<SlnStateReactor>();
+        services.AddTransient<IBusListener<SlnLoaded>>(x => x.GetRequiredService<SlnStateReactor>());
+        services.AddTransient<IBusListener<ProjectLoaded>>(x => x.GetRequiredService<SlnStateReactor>());
+
+        services.AddSingleton<SlnDisplay>();
+        services.AddTransient<IBusListener<SlnState>>(x => x.GetRequiredService<SlnDisplay>());
 
         return services;
     }
