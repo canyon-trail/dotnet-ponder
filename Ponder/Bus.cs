@@ -14,6 +14,7 @@ public sealed class Bus : IBus
 
     public async Task Publish<T>(T message) where T : notnull
     {
+        Console.WriteLine($"publishing message {message}");
         var listeners = Provider.GetServices<IBusListener<T>>();
 
         foreach (var l in listeners)

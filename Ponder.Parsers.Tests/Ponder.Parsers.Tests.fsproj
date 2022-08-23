@@ -8,6 +8,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="ResourceUtils.fs" />
+        <Compile Include="FakeFilesystem.fs" />
+        <Compile Include="ProgramTests.fs" />
         <Compile Include="SlnParserTests.fs" />
         <EmbeddedResource Include="SlnExamples/*.sln" />
     </ItemGroup>

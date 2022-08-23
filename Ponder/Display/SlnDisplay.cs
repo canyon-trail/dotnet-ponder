@@ -6,7 +6,7 @@ public sealed class SlnDisplay : IBusListener<SlnState>
 {
     public Task OnPublish(SlnState message)
     {
-        Console.Clear();
+        //Console.Clear();
 
         foreach (var project in message.Projects)
         {

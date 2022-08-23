@@ -55,6 +55,7 @@ let pProject: Parser<_> =
     >>. sepBy (pInQuotes pNoQuote) (pstring ", ")
     |>> fun x -> { Name = x.Head; Path = x.Tail.Head }
 
+// TODO: move to separate file
 let readLines (rdr :StreamReader) = async {
     let mutable lines = List<string>()
 

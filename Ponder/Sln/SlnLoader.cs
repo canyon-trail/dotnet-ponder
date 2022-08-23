@@ -32,8 +32,7 @@ public sealed class SlnLoader : IBusListener<SlnSelected>
         }
 
         var slnRoot = Path.GetDirectoryName(slnPath);
-        Directory.SetCurrentDirectory(slnRoot!);
-        slnPath = Path.GetFileName(slnPath);
+        _filesystem.SetDirectory(slnRoot!);
 
         var slnFile = await _filesystem.LoadSln(slnPath);
 

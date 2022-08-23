@@ -18,6 +18,7 @@ public sealed class SlnStateReactor
     private SlnState? _state;
     public async Task OnPublish(SlnLoaded message)
     {
+        Console.WriteLine($"handling SlnLoaded {message}");
         var state = _state;
         lock (this)
         {

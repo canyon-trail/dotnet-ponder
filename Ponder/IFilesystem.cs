@@ -12,6 +12,7 @@ public interface IFilesystem
     Task<SlnParser.SlnFile> LoadSln(string path);
     Task<Projects.ProjectInfo> LoadProject(string path);
     bool Exists(string path);
+    void SetDirectory(string path);
 }
 
 public sealed class RealFilesystem : IFilesystem
@@ -55,5 +56,10 @@ public sealed class RealFilesystem : IFilesystem
     public bool Exists(string path)
     {
         return File.Exists(path);
+    }
+
+    public void SetDirectory(string path)
+    {
+        Directory.SetCurrentDirectory(path);
     }
 }

@@ -8,7 +8,8 @@ var bus = new Bus(new ServiceCollection().AddPonderServices());
 
 if (args.Length > 0)
 {
-    await bus.Publish(new SlnSelected(args[0]));
+    var path = Path.GetFullPath(args[0]);
+    await bus.Publish(new SlnSelected(path));
 }
 else
 {

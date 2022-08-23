@@ -3,10 +3,18 @@
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <OutputType>Exe</OutputType>
+        <PackageId>dotnet-ponder</PackageId>
+        <PackAsTool>true</PackAsTool>
+        <RepositoryUrl>https://github.com/canyon-trail/dotnet-ponder</RepositoryUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <ToolCommandName>dotnet-ponder</ToolCommandName>
     </PropertyGroup>
 
     <ItemGroup>
         <Compile Include="SlnParser.fs" />
+        <Compile Include="Filesystem.fs" />
+        <Compile Include="Program.fs" />
     </ItemGroup>
 
     <ItemGroup>

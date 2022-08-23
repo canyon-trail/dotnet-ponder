@@ -12,14 +12,17 @@ public sealed class ProjectLoader : IBusListener<SlnLoaded>
         _bus = bus;
         _filesystem = filesystem;
     }
-    public async Task OnPublish(SlnLoaded message)
+    public Task OnPublish(SlnLoaded message)
     {
-        var parseProjectTasks = message.Projects
-            .Select(x => _filesystem.LoadProject(x.Path));
+        Task.Run(async () =>
+        {
+            await Task.WhenAll(
+                message.Projects
+                    .Select(x => _filesystem.LoadProject(x.Path))
+                    .Select(x => x.ContinueWith(p => _bus.Publish(new ProjectLoaded(p.Result))))
+            );
+        });
 
-        var projects = await Task.WhenAll(parseProjectTasks);
-
-        await Task.WhenAll(
-            projects.Select(x => _bus.Publish(new ProjectLoaded(x))));
+        return Task.CompletedTask;
     }
 }
