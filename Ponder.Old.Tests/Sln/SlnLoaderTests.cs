@@ -6,11 +6,10 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.FSharp.Collections;
 using Moq;
-using Ponder.Parsers;
-using Ponder.Sln;
+using Ponder.Old.Sln;
 using Xunit;
 
-namespace Ponder.Tests.Sln;
+namespace Ponder.Old.Tests.Sln;
 
 public sealed class SlnLoaderTests
 {

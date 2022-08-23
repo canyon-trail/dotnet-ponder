@@ -2,12 +2,11 @@
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Ponder.Parsers;
-using Ponder.Projects;
-using Ponder.Sln;
+using Ponder.Old.Projects;
+using Ponder.Old.Sln;
 using Xunit;
 
-namespace Ponder.Tests.Sln;
+namespace Ponder.Old.Tests.Sln;
 
 public sealed class SlnStateReactorTests : BusFixture
 {

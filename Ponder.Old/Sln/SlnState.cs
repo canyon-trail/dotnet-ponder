@@ -1,7 +1,7 @@
 ﻿using System.Collections.Immutable;
-using Ponder.Projects;
+using Ponder.Old.Projects;
 
-namespace Ponder.Sln;
+namespace Ponder.Old.Sln;
 
 public abstract record ProjectState(string Name, string Path);
 

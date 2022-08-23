@@ -1,4 +1,4 @@
-﻿module Ponder.Parsers.Filesystem
+﻿module Ponder.Filesystem
 
 open System.IO
 

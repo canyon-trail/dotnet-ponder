@@ -1,6 +1,6 @@
-﻿using Ponder.Sln;
+﻿using Ponder.Old.Sln;
 
-namespace Ponder.Display;
+namespace Ponder.Old.Display;
 
 public sealed class SlnDisplay : IBusListener<SlnState>
 {

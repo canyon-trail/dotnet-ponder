@@ -1,4 +1,4 @@
-﻿module Ponder.Parsers.SlnParser
+﻿module Ponder.SlnParser
 
 open System.Collections.Generic
 open System.IO

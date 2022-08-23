@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Ponder;
+namespace Ponder.Old;
 
 public sealed class Bus : IBus
 {

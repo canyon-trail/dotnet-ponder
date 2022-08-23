@@ -4,12 +4,11 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
-using Ponder.Parsers;
-using Ponder.Projects;
-using Ponder.Sln;
+using Ponder.Old.Projects;
+using Ponder.Old.Sln;
 using Xunit;
 
-namespace Ponder.Tests.Projects;
+namespace Ponder.Old.Tests.Projects;
 
 public sealed class ProjectLoaderTests
 {

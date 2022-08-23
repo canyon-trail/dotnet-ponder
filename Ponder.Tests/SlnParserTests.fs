@@ -6,7 +6,7 @@ open Xunit
 open FsUnit.Xunit
 open FParsec
 
-open Ponder.Parsers.SlnParser
+open Ponder.SlnParser
 
 [<Fact>]
 let ``parses dotnet-ponder.sln`` () =

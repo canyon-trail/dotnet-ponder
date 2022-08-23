@@ -1,4 +1,4 @@
-﻿namespace Ponder.Exits;
+﻿namespace Ponder.Old.Exits;
 
 public sealed record ExitSignal { }
 

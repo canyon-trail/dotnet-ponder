@@ -1,7 +1,7 @@
-﻿module Ponder.Parsers.Program
+﻿module Ponder.Program
 
-open Ponder.Parsers.Filesystem
-open Ponder.Parsers.SlnParser
+open Ponder.Filesystem
+open Ponder.SlnParser
 
 type SlnFindResult =
     | Found of SlnFile

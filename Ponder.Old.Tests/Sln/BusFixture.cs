@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 
-namespace Ponder.Tests.Sln;
+namespace Ponder.Old.Tests.Sln;
 
 public class BusFixture
 {

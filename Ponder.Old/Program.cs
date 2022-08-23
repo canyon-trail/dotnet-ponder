@@ -1,8 +1,9 @@
 ﻿
 using Microsoft.Extensions.DependencyInjection;
 using Ponder;
-using Ponder.Exits;
-using Ponder.Sln;
+using Ponder.Old;
+using Ponder.Old.Exits;
+using Ponder.Old.Sln;
 
 var bus = new Bus(new ServiceCollection().AddPonderServices());
 

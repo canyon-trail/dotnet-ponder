@@ -1,7 +1,7 @@
 ﻿using System.Collections.Immutable;
-using Ponder.Exits;
+using Ponder.Old.Exits;
 
-namespace Ponder.Sln;
+namespace Ponder.Old.Sln;
 
 public sealed class SlnLoader : IBusListener<SlnSelected>
 {

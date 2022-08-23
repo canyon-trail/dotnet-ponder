@@ -1,8 +1,7 @@
 ﻿using System.Collections.Immutable;
-using System.Linq;
-using Ponder.Projects;
+using Ponder.Old.Projects;
 
-namespace Ponder.Sln;
+namespace Ponder.Old.Sln;
 
 public sealed class SlnStateReactor
     : IBusListener<SlnLoaded>

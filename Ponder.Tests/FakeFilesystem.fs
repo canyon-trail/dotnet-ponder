@@ -1,6 +1,6 @@
 ﻿module Ponder.Parsers.Tests.FakeFilesystem
 
-open Ponder.Parsers.Filesystem
+open Ponder.Filesystem
 
 type FakeFilesystem(root: string) =
     let mutable _root = root

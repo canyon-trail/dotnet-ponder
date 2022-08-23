@@ -1,6 +1,5 @@
 using System.Collections.Immutable;
-using Ponder.Parsers;
 
-namespace Ponder.Sln;
+namespace Ponder.Old.Sln;
 
 public sealed record SlnLoaded(ImmutableArray<SlnParser.SlnProject> Projects);

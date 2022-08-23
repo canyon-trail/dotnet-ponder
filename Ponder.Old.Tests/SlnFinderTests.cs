@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
-using Ponder.Exits;
-using Ponder.Sln;
-using Ponder.Tests.Sln;
+using Ponder.Old.Exits;
+using Ponder.Old.Sln;
+using Ponder.Old.Tests.Sln;
 using Xunit;
 
-namespace Ponder.Tests;
+namespace Ponder.Old.Tests;
 
 public sealed class SlnFinderTests : BusFixture
 {

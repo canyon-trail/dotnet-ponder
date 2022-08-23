@@ -2,7 +2,7 @@
 
 open System.IO
 open System.Reflection
-open Ponder.Parsers.SlnParser
+open Ponder.SlnParser
 
 let readResource name =
     let stream = Assembly

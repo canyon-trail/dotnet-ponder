@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Ponder.Display;
-using Ponder.Exits;
-using Ponder.Projects;
-using Ponder.Sln;
+using Ponder.Old.Display;
+using Ponder.Old.Exits;
+using Ponder.Old.Projects;
+using Ponder.Old.Sln;
 
-namespace Ponder;
+namespace Ponder.Old;
 
 // because this is apparently the way we do it...
 public static class ServiceCollectionExtensions

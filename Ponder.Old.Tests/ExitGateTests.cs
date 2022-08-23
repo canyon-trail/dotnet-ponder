@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
-using Ponder.Exits;
+using Ponder.Old.Exits;
 using Xunit;
 
-namespace Ponder.Tests;
+namespace Ponder.Old.Tests;
 
 public sealed class ExitGateTests
 {

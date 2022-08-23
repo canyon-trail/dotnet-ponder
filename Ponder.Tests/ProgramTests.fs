@@ -4,8 +4,8 @@ open Xunit
 open FsUnit.Xunit
 open Ponder.Parsers.Tests.FakeFilesystem
 open Ponder.Parsers.Tests.ResourceUtils
-open Ponder.Parsers.Program
-open Ponder.Parsers.SlnParser
+open Ponder.Program
+open Ponder.SlnParser
 
 [<Fact>]
 let ``returns NotFound for no sln file found`` () =

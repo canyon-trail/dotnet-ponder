@@ -1,7 +1,7 @@
-﻿using Ponder.Exits;
-using Ponder.Sln;
+﻿using Ponder.Old.Exits;
+using Ponder.Old.Sln;
 
-namespace Ponder;
+namespace Ponder.Old;
 
 public sealed class SlnFinder
 {
