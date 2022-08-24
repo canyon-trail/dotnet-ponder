@@ -1,22 +1,11 @@
 ﻿module Ponder.SlnParser
 
+open Ponder.SlnTypes
+
 open System.Collections.Generic
 open System.IO
 open System.Threading.Tasks
 open FParsec
-
-type SlnProject = {
-    Name: string;
-    Path: string;
-}
-
-type SlnFile = {
-    Projects: SlnProject list
-}
-
-let EmptySln = {
-    Projects = [];
-}
 
 type UserState = unit
 type Parser<'t> = Parser<'t, UserState>

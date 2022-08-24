@@ -27,7 +27,7 @@ public sealed class ProjectLoaderTests
 
         bus.OnPublish += published.Add;
 
-        await bus.Publish(new SlnLoaded(ImmutableArray.Create(new SlnParser.SlnProject("Example", projectPath))));
+        await bus.Publish(new SlnLoaded(ImmutableArray.Create(new SlnTypes.SlnProject("Example", projectPath))));
 
         published.Should().Contain(new ProjectLoaded(projectInfo));
     }

@@ -12,6 +12,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="SlnTypes.fs" />
+        <Compile Include="AppState.fs" />
         <Compile Include="SlnParser.fs" />
         <Compile Include="Filesystem.fs" />
         <Compile Include="Program.fs" />

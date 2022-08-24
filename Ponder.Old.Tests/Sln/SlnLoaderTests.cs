@@ -22,10 +22,10 @@ public sealed class SlnLoaderTests
             .ReplaceFilesystem(filesystem.Object));
 
         var slnPath = "C:\\proj\\myproj.sln";
-        var sln = new SlnParser.SlnFile(
-            FSharpList<SlnParser.SlnProject>.Cons(
-                new SlnParser.SlnProject("aproj", "C:\\proj\\aproj\\aproj.csproj"),
-                FSharpList<SlnParser.SlnProject>.Empty
+        var sln = new SlnTypes.SlnFile(
+            FSharpList<SlnTypes.SlnProject>.Cons(
+                new SlnTypes.SlnProject("aproj", "C:\\proj\\aproj\\aproj.csproj"),
+                FSharpList<SlnTypes.SlnProject>.Empty
             ));
         filesystem.Setup(x => x.LoadSln(slnPath))
             .ReturnsAsync(sln);

@@ -8,7 +8,7 @@ public interface IFilesystem
 {
     string CurrentDirectory { get; }
     Task<ImmutableArray<string>> ListFiles(string directory, string filter);
-    Task<SlnParser.SlnFile> LoadSln(string path);
+    Task<SlnTypes.SlnFile> LoadSln(string path);
     Task<Projects.ProjectInfo> LoadProject(string path);
     bool Exists(string path);
     void SetDirectory(string path);
@@ -26,7 +26,7 @@ public sealed class RealFilesystem : IFilesystem
         );
     }
 
-    public async Task<SlnParser.SlnFile> LoadSln(string path)
+    public async Task<SlnTypes.SlnFile> LoadSln(string path)
     {
         var slnLines = await File.ReadAllLinesAsync(path);
 

@@ -14,8 +14,8 @@ public sealed class SlnStateReactorTests : BusFixture
     public async Task PublishesInitialState()
     {
         await Bus.Publish(new SlnLoaded(ImmutableArray.Create(
-            new SlnParser.SlnProject("proj1", "proj1/proj1.csproj"),
-            new SlnParser.SlnProject("proj2", "proj2/proj2.csproj")
+            new SlnTypes.SlnProject("proj1", "proj1/proj1.csproj"),
+            new SlnTypes.SlnProject("proj2", "proj2/proj2.csproj")
             )));
 
         Messages
@@ -38,8 +38,8 @@ public sealed class SlnStateReactorTests : BusFixture
     public async Task PublishesSingleProjectLoaded()
     {
         await Bus.Publish(new SlnLoaded(ImmutableArray.Create(
-            new SlnParser.SlnProject("proj1", "proj1/proj1.csproj"),
-            new SlnParser.SlnProject("proj2", "proj2/proj2.csproj")
+            new SlnTypes.SlnProject("proj1", "proj1/proj1.csproj"),
+            new SlnTypes.SlnProject("proj2", "proj2/proj2.csproj")
             )));
 
         var loadedProject = new ProjectInfo(

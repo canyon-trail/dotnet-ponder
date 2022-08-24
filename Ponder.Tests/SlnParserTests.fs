@@ -7,13 +7,14 @@ open FsUnit.Xunit
 open FParsec
 
 open Ponder.SlnParser
+open Ponder.SlnTypes
 
 [<Fact>]
 let ``parses dotnet-ponder.sln`` () =
     let stream = Assembly
                      .GetExecutingAssembly()
                      .GetManifestResourceStream(
-                         "Ponder.Parsers.Tests.SlnExamples.dotnet-ponder.sln")
+                         "Ponder.Tests.SlnExamples.dotnet-ponder.sln")
 
     async {
         use rdr = new StreamReader(stream)
