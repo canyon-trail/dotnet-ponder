@@ -13,7 +13,10 @@
 
     <ItemGroup>
         <Compile Include="SlnTypes.fs" />
-        <Compile Include="AppState.fs" />
+        <Compile Include="AppState\States.fs" />
+        <Compile Include="AppState\Actions.fs" />
+        <Compile Include="AppState\Reducer.fs" />
+        <Compile Include="AppStateReactor.fs" />
         <Compile Include="SlnParser.fs" />
         <Compile Include="Filesystem.fs" />
         <Compile Include="Program.fs" />
@@ -21,6 +24,7 @@
 
     <ItemGroup>
       <PackageReference Include="FParsec" Version="1.1.1" />
+      <PackageReference Include="FSharp.Control.Reactive" Version="5.0.5" />
     </ItemGroup>
 
 </Project>

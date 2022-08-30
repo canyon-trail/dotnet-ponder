@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="ProjectUtils.fs" />
         <Compile Include="ResourceUtils.fs" />
         <Compile Include="FakeFilesystem.fs" />
         <Compile Include="ProgramTests.fs" />

@@ -1,13 +1,9 @@
-﻿module Ponder.AppState
+﻿module Ponder.AppState.States
 
-open SlnTypes
-
-type OpeningRecord = {
-    Sln: SlnFile;
-    Projects: List<Project>;
-}
+open Ponder.SlnTypes
 
 type LoadedRecord = {
+    Sln: SlnFile;
     Projects: List<Project>;
 } 
 

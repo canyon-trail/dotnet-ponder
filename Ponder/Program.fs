@@ -3,6 +3,7 @@
 open Ponder.SlnTypes
 open Ponder.Filesystem
 open Ponder.SlnParser
+open FSharp.Control
 
 type SlnFindResult =
     | Found of SlnFile
@@ -26,8 +27,8 @@ let findSln (filesystem: IFilesystem) = async {
     return!
         match slnFiles with
         | [f] -> parseSlnFromPath filesystem f
-        | [] -> async { return NotFound }
-        | _ -> async { return Multiple slnFiles }
+        | [] -> async.Return NotFound
+        | _ -> Multiple slnFiles |> async.Return
 }
 
 [<EntryPoint>]
