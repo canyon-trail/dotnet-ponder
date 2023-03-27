@@ -20,15 +20,16 @@ let ``returns NotFound for no sln file found`` () =
 [<Fact>]
 let ``returns Found for single sln file`` () =
     let filesystem = FakeFilesystem "C:\\somewhere"
+    let slnPath = "C:\\somewhere\\example.sln"
     
     async {
         let! slnContents = readResource "Ponder.Tests.SlnExamples.dotnet-ponder.sln"
-        do filesystem.AddFile "C:\\somewhere\\example.sln" slnContents
+        do filesystem.AddFile slnPath slnContents
         
         let expectedSlnFile = parseSlnFromLines slnContents
         
         let! result = findSln filesystem
-        result |> should equal (Found expectedSlnFile)
+        result |> should equal (Found (slnPath, expectedSlnFile))
     }
     
 [<Fact>]

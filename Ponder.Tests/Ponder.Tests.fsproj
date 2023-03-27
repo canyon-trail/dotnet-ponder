@@ -13,6 +13,7 @@
         <Compile Include="FakeFilesystem.fs" />
         <Compile Include="ProgramTests.fs" />
         <Compile Include="SlnParserTests.fs" />
+        <Compile Include="CliArgsTests.fs" />
         <EmbeddedResource Include="SlnExamples/*.sln" />
     </ItemGroup>
 

@@ -19,12 +19,19 @@
         <Compile Include="AppStateReactor.fs" />
         <Compile Include="SlnParser.fs" />
         <Compile Include="Filesystem.fs" />
+        <Compile Include="Obs.fs" />
+        <Compile Include="ProjectLoader.fs" />
+        <Compile Include="CompositionRoot.fs" />
+        <Compile Include="CliArgs.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="FParsec" Version="1.1.1" />
       <PackageReference Include="FSharp.Control.Reactive" Version="5.0.5" />
+      <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+      <PackageReference Include="Serilog.Extensions.Logging" Version="3.1.0" />
+      <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     </ItemGroup>
 
 </Project>
