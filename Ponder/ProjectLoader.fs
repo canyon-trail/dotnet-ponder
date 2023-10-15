@@ -3,6 +3,7 @@
 open System
 open System.IO
 open System.Xml.Linq
+open Microsoft.Extensions.Logging
 open Ponder.SlnTypes
 open Ponder.AppState.States
 open Ponder.AppState.Actions
@@ -16,8 +17,6 @@ let private isOpening state =
     
     
 let private loadProject (filesystem: IFilesystem) (project: SlnProject) = async {
-    printfn "loading a project yo"
-    
     let! lines = filesystem.LoadFile project.Path
     let contents = String.Join(Environment.NewLine, lines)
     
@@ -52,12 +51,12 @@ let private loadProject (filesystem: IFilesystem) (project: SlnProject) = async 
     }
 }
     
-let private loadProjects filesystem (dispatch: Dispatch) state =
-    printfn "inside loadProjects"
+let private loadProjects filesystem (dispatch: Dispatch) (logger: ILogger) state =
+    logger.LogInformation("inside loadProjects")
     let slnFile =
         match state with
         | Opening sln -> sln
-        | _ -> failwith "Expected Loading state"
+        | _ -> failwith "Expected Opening state"
         
     let projectAsyncs =
         slnFile.Projects
@@ -67,7 +66,7 @@ let private loadProjects filesystem (dispatch: Dispatch) state =
         let! projectsArray =
             projectAsyncs
             |> Async.Parallel
-            
+
         let projects =
             projectsArray
             |> List.ofSeq
@@ -75,15 +74,15 @@ let private loadProjects filesystem (dispatch: Dispatch) state =
         do dispatch (projects |> ProjectsLoaded)
         
         return ()
-    } |> ignore
+    }
+    |> Async.RunSynchronously
     
     ()
     
-let createLoader (reactor: Reactor) (filesystem: IFilesystem): IDisposable =
+let createLoader (reactor: Reactor) (filesystem: IFilesystem) (logger: ILogger): IDisposable =
     let relevantEvents =
         reactor.Stream
         |> Observable.filter isOpening
-        //|> Obs.distinct
-        
+
     relevantEvents
-    |> Observable.subscribe (loadProjects filesystem reactor.Dispatch)
+    |> Observable.subscribe (loadProjects filesystem reactor.Dispatch logger)

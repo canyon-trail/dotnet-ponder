@@ -51,6 +51,8 @@ let tryRunReactor (res: Result<string * SlnFile, string>) filesystem (loggerFact
         return 1
     | Ok (path, sln) ->
         logger.LogInformation("Opening sln at {path}", path)
+        let dir = System.IO.Path.GetDirectoryName(path)
+        System.Environment.CurrentDirectory <- dir
         do! runReactor sln filesystem loggerFactory
         
         return 0

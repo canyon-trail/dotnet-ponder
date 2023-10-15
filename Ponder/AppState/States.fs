@@ -8,5 +8,6 @@ type LoadedRecord = {
 } 
 
 type State =
+    | Uninitialized
     | Opening of SlnFile
     | Loaded of LoadedRecord

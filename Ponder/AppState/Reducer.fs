@@ -12,7 +12,13 @@ let private reduceOpening state sln action =
         }
     | _ -> state
 
+let private reduceUninitialized state action =
+    match action with
+    | Initialize st -> st
+    | _ -> state
+
 let reduce (state: State) (action: Action) =
     match state with
+    | Uninitialized -> reduceUninitialized state action
     | Loaded _ -> state
     | Opening sln -> reduceOpening state sln action

@@ -25,14 +25,13 @@ let shouldEnd action =
     | End -> true
     | _ -> false
 
-let initReactor (state: State) (logger: ILogger) =
-    let subject = Subject.behavior state
+let initReactor (logger: ILogger) =
+    let subject = Subject.behavior Uninitialized
     
     let mutable pendingActions = ConcurrentBag<Action>()
     let l = Object()
     let tcs = TaskCompletionSource<unit>()
-    logger.LogInformation("Initial state: {state}", state)
-    
+
     let dispatch =
         fun a ->
             pendingActions.Add(a)
@@ -55,7 +54,7 @@ let initReactor (state: State) (logger: ILogger) =
                     logger.LogInformation("New state: {state}", newState)
 
                     subject.OnNext newState
-                    
+
                     let endActionExists =
                         actions
                         |> Seq.exists shouldEnd

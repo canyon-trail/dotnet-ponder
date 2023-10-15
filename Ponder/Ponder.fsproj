@@ -19,7 +19,6 @@
         <Compile Include="AppStateReactor.fs" />
         <Compile Include="SlnParser.fs" />
         <Compile Include="Filesystem.fs" />
-        <Compile Include="Obs.fs" />
         <Compile Include="ProjectLoader.fs" />
         <Compile Include="CompositionRoot.fs" />
         <Compile Include="CliArgs.fs" />
