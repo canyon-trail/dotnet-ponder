@@ -52,7 +52,6 @@ let private loadProject (filesystem: IFilesystem) (project: SlnProject) = async 
 }
     
 let private loadProjects filesystem (dispatch: Dispatch) (logger: ILogger) state =
-    logger.LogInformation("inside loadProjects")
     let slnFile =
         match state with
         | Opening sln -> sln
@@ -75,7 +74,7 @@ let private loadProjects filesystem (dispatch: Dispatch) (logger: ILogger) state
         
         return ()
     }
-    |> Async.RunSynchronously
+    |> Async.Start
     
     ()
     

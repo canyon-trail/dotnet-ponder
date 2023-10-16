@@ -28,42 +28,24 @@ let shouldEnd action =
 let initReactor (logger: ILogger) =
     let subject = Subject.behavior Uninitialized
     
-    let mutable pendingActions = ConcurrentBag<Action>()
-    let l = Object()
     let tcs = TaskCompletionSource<unit>()
 
     let dispatch =
-        fun a ->
-            pendingActions.Add(a)
-            logger.LogInformation("Dispatched {action}", a)
-            
-            lock l (
-                fun () ->
-                    let p = Interlocked.Exchange(ref pendingActions, ConcurrentBag<Action>())
-                    let mutable actions = p |> List.ofSeq
-                    
-                    let mutable newState = subject.Value
-                    logger.LogInformation("Current state: {state}", newState)
-                    
-                    while actions.Length > 0 do
-                        let a = actions.Head
-                        actions <- actions.Tail
-                        logger.LogInformation("Reducing {action}", a)
-                        newState <- reduce newState a
-                        
-                    logger.LogInformation("New state: {state}", newState)
+        fun (action: Action) ->
+            logger.LogInformation("Current state: {state}", subject.Value)
 
-                    subject.OnNext newState
+            logger.LogInformation("Reducing {action}", action)
 
-                    let endActionExists =
-                        actions
-                        |> Seq.exists shouldEnd
-                        
-                    if endActionExists
-                    then tcs.SetResult()
-                    else ()
-            )
-    
+            let newState = reduce subject.Value action
+
+            logger.LogInformation("New state: {state}", newState)
+
+            subject.OnNext newState
+
+            if shouldEnd action
+            then tcs.SetResult()
+            else ()
+
     {
         Stream = subject
         Dispatch = dispatch

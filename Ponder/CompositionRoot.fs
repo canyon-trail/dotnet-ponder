@@ -13,6 +13,7 @@ let composeApp sln filesystem (logFactory: ILoggerFactory) =
     let reactor = initReactor  logger
     
     ProjectLoader.createLoader reactor filesystem logger |> ignore
+    Displayer.createDisplayer reactor.Stream |> ignore
 
     logger.LogInformation("dispatching initial state")
 

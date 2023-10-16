@@ -16,6 +16,7 @@
         <Compile Include="AppState\States.fs" />
         <Compile Include="AppState\Actions.fs" />
         <Compile Include="AppState\Reducer.fs" />
+        <Compile Include="Displayer.fs" />
         <Compile Include="AppStateReactor.fs" />
         <Compile Include="SlnParser.fs" />
         <Compile Include="Filesystem.fs" />
